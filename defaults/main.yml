@@ -1,17 +1,18 @@
 ---
 
-newrelic_download_dir: '~/Downloads'
-newrelic_version: '3.7.0'
+newrelic_download_dir: '{{ role_path }}/../../input/newrelic-java'
+newrelic_version: '3.18.0'
 newrelic_container: 'tomcat'
 newrelic_package: 'newrelic-java-{{newrelic_version}}.zip'
 newrelic_download_url: "https://oss.sonatype.org/content/repositories/releases/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/{{newrelic_package}}"
 #newrelic_license_key: 
-newrelic_installation_dir: '/home/vagrant/newrelic'
+newrelic_installation_dir: '/opt/newrelic-java'
 newrelic_agent_enabled: true
 newrelic_app_name: "My Application"
-newrelic_enable_auto_app_naming: false
-newrelic_enbale_auto_transaction_naming: true
+newrelic_enable_auto_app_naming: "true"
+newrelic_enbale_auto_transaction_naming: "true"
 newrelic_log_level: info
+newrelic_high_security: false
 newrelic_audit_mode: false
 newrelic_log_file_count: 1
 newrelic_log_limit_in_kbytes: 0

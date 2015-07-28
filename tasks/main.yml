@@ -1,34 +1,38 @@
 ---
 
 - name: ensures New Relic package is present at control machine
-  local_action: >
-    get_url 
-      url="{{newrelic_download_url}}"
-      dest="{{newrelic_download_dir}}/{{newrelic_package}}"
+  local_action: get_url url="{{newrelic_download_url}}" dest="{{newrelic_download_dir}}/{{newrelic_package}}"
+  connection: local
 
 - name: ensures New Relic folder exists
   file:
     path="{{newrelic_installation_dir}}/{{newrelic_version}}"
     state=directory
-    mode=0755
+    owner=tomcat
+    group=tomcat
+    mode=0750
 
 - name: unpack New Relic
   unarchive:
     src="{{newrelic_download_dir}}/{{newrelic_package}}"
     dest="{{newrelic_installation_dir}}/{{newrelic_version}}"
-    creates="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic.jar"
+    creates="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic/newrelic.jar"
+    owner=tomcat
+    group=tomcat
+    mode=0750
   tags: unpack
-
-- name: moves New Relic content to its rightfull place
-  shell:
-    mv newrelic/* ./; rm -rf newrelic
-    chdir="{{newrelic_installation_dir}}/{{newrelic_version}}"
-    creates="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic.jar"
 
 - name: configures newrelic.yml
   template:
     src="newrelic.yml.j2"
-    dest="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic.yml"
+    owner=tomcat
+    group=tomcat
+    mode=0660
+    dest="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic/newrelic.yml"
+
+- name: set link to newrelic version
+  file: src={{newrelic_installation_dir}}/{{newrelic_version}}/newrelic dest={{newrelic_installation_dir}}/newrelic owner=tomcat group=tomcat state=link
 
 - include: tomcat.yml
   when: newrelic_container == 'tomcat'
+
