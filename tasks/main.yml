@@ -8,8 +8,8 @@
   file:
     path="{{newrelic_installation_dir}}/{{newrelic_version}}"
     state=directory
-    owner=tomcat
-    group=tomcat
+    owner={{newrelic_os_user}}
+    group={{newrelic_os_group}}
     mode=0750
 
 - name: unpack New Relic
@@ -17,21 +17,21 @@
     src="{{newrelic_download_dir}}/{{newrelic_package}}"
     dest="{{newrelic_installation_dir}}/{{newrelic_version}}"
     creates="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic/newrelic.jar"
-    owner=tomcat
-    group=tomcat
+    owner={{newrelic_os_user}}
+    group={{newrelic_os_group}}
     mode=0750
   tags: unpack
 
 - name: configures newrelic.yml
   template:
     src="newrelic.yml.j2"
-    owner=tomcat
-    group=tomcat
+    owner={{newrelic_os_user}}
+    group={{newrelic_os_group}}
     mode=0660
     dest="{{newrelic_installation_dir}}/{{newrelic_version}}/newrelic/newrelic.yml"
 
 - name: set link to newrelic version
-  file: src={{newrelic_installation_dir}}/{{newrelic_version}}/newrelic dest={{newrelic_installation_dir}}/newrelic owner=tomcat group=tomcat state=link
+  file: src={{newrelic_installation_dir}}/{{newrelic_version}}/newrelic dest={{newrelic_installation_dir}}/newrelic owner={{newrelic_os_user}} group={{newrelic_os_group}} state=link
 
 - include: tomcat.yml
   when: newrelic_container == 'tomcat'
