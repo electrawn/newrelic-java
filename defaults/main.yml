@@ -39,3 +39,5 @@ newrelic_top_n: 20
 newrelic_ignore_errors: 'akka.actor.ActorKilledException'
 newrelic_ignore_status_codes: 404
 newrelic_max_samples_stored: 2000
+newrelic_os_user: tomcat
+newrelic_os_group: tomcat
