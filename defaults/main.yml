@@ -4,7 +4,7 @@ newrelic_download_dir: '{{ role_path }}/../../input/newrelic-java'
 newrelic_version: '3.18.0'
 newrelic_container: 'tomcat'
 newrelic_package: 'newrelic-java-{{newrelic_version}}.zip'
-newrelic_download_url: "https://oss.sonatype.org/content/repositories/releases/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/{{newrelic_package}}"
+newrelic_download_url: "https://repo1.maven.org/maven2/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/{{newrelic_package}}"
 #newrelic_license_key: 
 newrelic_installation_dir: '/opt/newrelic-java'
 newrelic_agent_enabled: true
