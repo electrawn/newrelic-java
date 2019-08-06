@@ -1,7 +1,7 @@
 ---
 
-newrelic_download_dir: '{{ role_path }}/../../input/newrelic-java'
-newrelic_version: '3.18.0'
+newrelic_download_dir: '/tmp'
+newrelic_version: '5.3.0'
 newrelic_container: 'tomcat'
 newrelic_package: 'newrelic-java-{{newrelic_version}}.zip'
 newrelic_download_url: "https://repo1.maven.org/maven2/com/newrelic/agent/java/newrelic-java/{{newrelic_version}}/{{newrelic_package}}"
